@@ -8,6 +8,7 @@ namespace LearningWebApi.Api.Controllers.V2;
 [ApiVersion("2.0")]
 [ApiController]
 [Route("api/[controller]")]
+[ApiKeyAuthFilter]
 public class TicketsController : ControllerBase
 {
     private readonly IDataRepository _repository;
