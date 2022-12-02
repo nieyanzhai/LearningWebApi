@@ -1,9 +1,11 @@
-using LearningWebApi.Api.Models;
-using LearningWebApi.Api.Services.Data.Contract;
+using LearningWebApi.Entity;
+using LearningWebApi.Infrastructure.Data.Contract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 
-namespace LearningWebApi.Api.Controllers;
+namespace LearningWebApi.Api.Controllers.V2;
 
+[ApiVersion("2.0")]
 [ApiController]
 [Route("api/[controller]")]
 public class ProjectsController : ControllerBase
@@ -17,6 +19,7 @@ public class ProjectsController : ControllerBase
 
 
     [HttpGet]
+    [EnableQuery]
     public async Task<IActionResult> Get()
     {
         var projects = await _dataRepository.GetProjects();

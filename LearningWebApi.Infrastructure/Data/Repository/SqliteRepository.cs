@@ -1,9 +1,9 @@
 using Dapper;
-using LearningWebApi.Api.Services.Data.Contract;
-using LearningWebApi.Api.Services.Data.DbContext;
 using LearningWebApi.Entity;
+using LearningWebApi.Infrastructure.Data.Contract;
+using LearningWebApi.Infrastructure.Data.DbContext;
 
-namespace LearningWebApi.Api.Services.Data.Repository;
+namespace LearningWebApi.Infrastructure.Data.Repository;
 
 public class SqliteDataRepository : IDataRepository
 {

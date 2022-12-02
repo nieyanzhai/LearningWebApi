@@ -1,0 +1,42 @@
+@page "/projects/{projectId:int}/tickets"
+
+
+<MudText Typo="Typo.h6">Tickets</MudText>
+<MudLink Href="@($"/projects/{projectId}/tickets/add")">
+    <MudIconButton Icon="@Icons.Material.Filled.Add" Color="Color.Primary"></MudIconButton>
+</MudLink>
+<br/>
+
+<MudTable Items="_tickets" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <ColGroup>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col/>
+        <col style="width: 150px"/>
+    </ColGroup>
+    <HeaderContent>
+        <MudTh>Title</MudTh>
+        <MudTh>Description</MudTh>
+        <MudTh>Owner</MudTh>
+        <MudTh>Due</MudTh>
+        <MudTh>Created</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Title</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+        <MudTd DataLabel="Owner">@context.Owner</MudTd>
+        <MudTd DataLabel="Due">@context.DueTo</MudTd>
+        <MudTd DataLabel="Created">@context.CreatedAt</MudTd>
+        <MudTd DataLabel="" Style="text-align:right">
+            <MudLink Href="@($"/projects/{projectId}/tickets/{context.Id}")">
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Size="Size.Small"></MudIconButton>
+            </MudLink>
+            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Primary" Size="Size.Small"
+                           OnClick="async () => await DeleteTicket(context)">
+            </MudIconButton>
+        </MudTd>
+    </RowTemplate>
+</MudTable>

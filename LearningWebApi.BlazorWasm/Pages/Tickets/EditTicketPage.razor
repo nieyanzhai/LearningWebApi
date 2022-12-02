@@ -1,6 +1,31 @@
-@page "/EditTicketPage"
-<h3>EditTicketPage</h3>
+@page "/projects/{projectId:int}/tickets/{ticketId:int}"
 
-@code {
-    
+
+@if (_showAlert)
+{
+    <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" ShowCloseIcon="true"
+              CloseIconClicked="() => ToggleAlert(false)">
+        @_alertMessage
+    </MudAlert>
 }
+
+
+<MudText Typo="Typo.h6">Edit Project: @_ticket.Title</MudText>
+
+<EditForm Model="_ticket" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudItem xs="12" sm="7">
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="Title" Required="true" @bind-Value="_ticket.Title" For="@(() => _ticket.Title)"/>
+                <MudTextField Label="Description" @bind-Value="_ticket.Description" For="@(() => _ticket.Description)"/>
+                <MudTextField Label="Owner" @bind-Value="_ticket.Owner" For="@(() => _ticket.Owner)"/>
+                <MudTextField Label="Due" Format="yyyy-MM-dd" InputType="InputType.Date" @bind-Value="_ticket.DueTo" For="@(() => _ticket.DueTo)"/>
+                <MudTextField Label="Created" Format="yyyy-MM-dd" InputType="InputType.Date" @bind-Value="_ticket.CreatedAt" For="@(() => _ticket.CreatedAt)"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Update</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</EditForm>

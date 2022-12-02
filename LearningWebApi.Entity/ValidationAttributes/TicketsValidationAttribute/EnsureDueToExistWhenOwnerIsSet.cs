@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LearningWebApi.Api.Models.ValidationAttributes.TicketsValidationAttribute;
+namespace LearningWebApi.Entity.ValidationAttributes.TicketsValidationAttribute;
 
 public class EnsureDueToExistWhenOwnerIsSet : ValidationAttribute
 {

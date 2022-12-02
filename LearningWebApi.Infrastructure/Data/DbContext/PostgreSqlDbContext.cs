@@ -1,7 +1,8 @@
 using System.Data;
+using Microsoft.Extensions.Configuration;
 using Npgsql;
 
-namespace LearningWebApi.Api.Services.Data.DbContext;
+namespace LearningWebApi.Infrastructure.Data.DbContext;
 
 public class PostgreSqlDbContext
 {

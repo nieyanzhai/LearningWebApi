@@ -1,9 +1,11 @@
-using LearningWebApi.Api.Models;
-using LearningWebApi.Api.Services.Data.Contract;
+using LearningWebApi.Api.Controllers.V2.Filters;
+using LearningWebApi.Entity;
+using LearningWebApi.Infrastructure.Data.Contract;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearningWebApi.Api.Controllers;
+namespace LearningWebApi.Api.Controllers.V2;
 
+[ApiVersion("2.0")]
 [ApiController]
 [Route("api/[controller]")]
 public class TicketsController : ControllerBase
@@ -38,6 +40,7 @@ public class TicketsController : ControllerBase
     }
 
     [HttpPost]
+    [TicketsDescriptionActionFilter]
     public async Task<IActionResult> CreateTicket([FromBody] Ticket ticket)
     {
         try
@@ -52,6 +55,7 @@ public class TicketsController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [TicketsDescriptionActionFilter]
     public async Task<IActionResult> UpdateTicket([FromRoute] int id, [FromBody] Ticket ticket)
     {
         if (id != ticket.Id) return BadRequest();

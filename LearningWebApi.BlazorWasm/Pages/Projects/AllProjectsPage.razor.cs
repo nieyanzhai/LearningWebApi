@@ -1,17 +1,19 @@
 using System.Text.Json;
+using LearningWebApi.BlazorWasm.Pages.Components;
 using LearningWebApi.Entity;
 using LearningWebApi.Service.ApiDataService;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
-namespace LearningWebApi.BlazorWasm.Pages;
+namespace LearningWebApi.BlazorWasm.Pages.Projects;
 
-public partial class AllProjects
+public partial class AllProjectsPage
 {
+    [Inject] public IDialogService DialogService { get; set; }
     [Inject] public IDataService DataService { get; set; }
     private readonly JsonSerializerOptions _jsonSerializerOptions = new() {WriteIndented = true};
     private IEnumerable<Project> _projects;
     private bool _loading;
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -23,6 +25,7 @@ public partial class AllProjects
 
     private async Task<IEnumerable<Project>> GetProjects()
     {
+        Console.WriteLine("Getting Projects...");
         var projects = (await DataService.GetProjects()).ToList();
         Console.WriteLine(JsonSerializer.Serialize(projects, _jsonSerializerOptions));
         return projects;
@@ -57,10 +60,25 @@ public partial class AllProjects
         Console.WriteLine("Project Updated");
     }
 
-    private async Task DeleteProject()
+    private async Task DeleteProject(Project project)
     {
-        var deletedProject = await DataService.DeleteProject(4);
-        Console.WriteLine(JsonSerializer.Serialize(deletedProject, _jsonSerializerOptions));
+        var parameters = new DialogParameters
+        {
+            {"ContentText", $"Do you really want to delete the project({project.Name})?"},
+            {"ButtonText", "Delete"},
+            {"ButtonColor", Color.Error}
+        };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium };
+        var dialog =DialogService.Show<DialogComponent>("Delete", parameters, options);
+        var dialogResult = await dialog.Result;
+        if(!dialogResult.Cancelled)
+        {
+            Console.WriteLine("Project Deleting...");
+            var deletedProject = await DataService.DeleteProject(project.Id);
+            Console.WriteLine(JsonSerializer.Serialize(deletedProject, _jsonSerializerOptions));
+            _projects = await GetProjects();
+            StateHasChanged();
+        }
     }
 
 
@@ -112,4 +130,5 @@ public partial class AllProjects
         var tickets = await DataService.GetTicketsByProjectId(8);
         Console.WriteLine(JsonSerializer.Serialize(tickets, _jsonSerializerOptions));
     }
+
 }

@@ -1,21 +1,18 @@
-using LearningWebApi.Infrastructure.Data.Contract;
-using LearningWebApi.Infrastructure.Data.DbContext;
-using LearningWebApi.Infrastructure.Data.Repository;
-using Microsoft.Extensions.Configuration;
+using LearningWebApi.Service.ApiDataService;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 
-namespace LearningWebApi.Infrastructure;
+namespace LearningWebApi.Service;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
-    {
-        // Add DbContext
-        // builder.Services.AddSingleton<SqliteDbContext>();
-        // builder.Services.AddScoped<IDataRepository, SqliteDataRepository>();
+    private const string BaseUrl = "https://localhost:7090";
 
-        services.AddSingleton<PostgreSqlDbContext>();
-        services.AddScoped<IDataRepository, PostgreSqlDataRepository>();
+    public static IServiceCollection AddSharedService(this IServiceCollection services)
+    {
+        var options = new RestClientOptions(BaseUrl);
+        services.AddSingleton(new RestClient(new HttpClient(), options));
+        services.AddSingleton<IDataService, DataService>();
 
         return services;
     }

@@ -1,7 +1,15 @@
-@page "/projects/add"
+@page "/projects/{id:int}"
+
+@if (_showAlert)
+{
+    <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" ShowCloseIcon="true"
+              CloseIconClicked="() => ToggleAlert(false)">
+        @_alertMessage
+    </MudAlert>
+}
 
 
-<MudText Typo="Typo.h6">Add Projects</MudText>
+<MudText Typo="Typo.h6">Edit Project: @_project.Name</MudText>
 
 <EditForm Model="_project" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator/>
@@ -12,7 +20,7 @@
                 <MudTextField Label="Description" @bind-Value="_project.Description" For="@(() => _project.Description)"/>
             </MudCardContent>
             <MudCardActions>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Update</MudButton>
             </MudCardActions>
         </MudCard>
     </MudItem>

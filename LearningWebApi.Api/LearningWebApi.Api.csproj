@@ -7,7 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.11" />
+        <PackageReference Include="OData.Swagger" Version="1.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LearningWebApi.Entity\LearningWebApi.Entity.csproj" />
+      <ProjectReference Include="..\LearningWebApi.Infrastructure\LearningWebApi.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

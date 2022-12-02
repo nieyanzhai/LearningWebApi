@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace LearningWebApi.Api.Models;
+namespace LearningWebApi.Entity;
 
 public class Project
 {

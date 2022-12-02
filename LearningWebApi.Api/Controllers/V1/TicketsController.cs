@@ -1,9 +1,10 @@
-using LearningWebApi.Api.Models;
-using LearningWebApi.Api.Services.Data.Contract;
+using LearningWebApi.Entity;
+using LearningWebApi.Infrastructure.Data.Contract;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearningWebApi.Api.Controllers;
+namespace LearningWebApi.Api.Controllers.V1;
 
+[ApiVersion("1.0")]
 [ApiController]
 [Route("api/[controller]")]
 public class TicketsController : ControllerBase

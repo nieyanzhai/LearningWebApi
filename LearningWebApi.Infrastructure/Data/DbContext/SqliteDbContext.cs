@@ -1,7 +1,8 @@
 using System.Data;
 using System.Data.SQLite;
+using Microsoft.Extensions.Configuration;
 
-namespace LearningWebApi.Api.Services.Data.DbContext;
+namespace LearningWebApi.Infrastructure.Data.DbContext;
 
 public class SqliteDbContext
 {

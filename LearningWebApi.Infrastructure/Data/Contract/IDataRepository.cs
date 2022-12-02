@@ -1,6 +1,6 @@
 using LearningWebApi.Entity;
 
-namespace LearningWebApi.Api.Services.Data.Contract;
+namespace LearningWebApi.Infrastructure.Data.Contract;
 
 public interface IDataRepository
 {

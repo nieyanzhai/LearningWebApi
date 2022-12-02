@@ -1,17 +1,20 @@
+using LearningWebApi.Entity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LearningWebApi.Api.Controllers.V2.Filters;
 
-public class TicketsDescriptionActionFilter:ActionFilterAttribute
+public class TicketsDescriptionActionFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        var description = context.HttpContext.Request.Query["description"];
-        if (string.IsNullOrWhiteSpace(description))
+        if (context.ActionArguments["ticket"] is Ticket ticket && !ticket.ValidateDescriptionExists())
         {
-            context.Result = new BadRequestObjectResult("Description is required");
+            context.ModelState.AddModelError("Description", "Description is required");
+            context.Result = new BadRequestObjectResult(context.ModelState);
             return;
         }
+
         base.OnActionExecuting(context);
     }
 }

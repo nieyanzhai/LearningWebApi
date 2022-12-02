@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using LearningWebApi.Api.Models.ValidationAttributes.TicketsValidationAttribute;
+using LearningWebApi.Entity.ValidationAttributes.TicketsValidationAttribute;
 
-namespace LearningWebApi.Api.Models;
+namespace LearningWebApi.Entity;
 
 public class Ticket
 {
