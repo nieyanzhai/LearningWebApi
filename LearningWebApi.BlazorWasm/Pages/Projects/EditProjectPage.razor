@@ -1,0 +1,19 @@
+@page "/projects/add"
+
+
+<MudText Typo="Typo.h6">Add Projects</MudText>
+
+<EditForm Model="_project" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator/>
+    <MudItem xs="12" sm="7">
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="Name" Required="true" @bind-Value="_project.Name" For="@(() => _project.Name)"/>
+                <MudTextField Label="Description" @bind-Value="_project.Description" For="@(() => _project.Description)"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</EditForm>
